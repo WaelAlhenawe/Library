@@ -1,6 +1,5 @@
 package ya.java.basic.movie;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,7 +61,6 @@ public class M_Library implements Library<Movie>{
 	@Override
 	public Movie getItem(int movieId) {
 		for(Movie m: movieList) {
-			int x = m.getId();
 			if (m.getId()==movieId) {
 				return m;
 			}

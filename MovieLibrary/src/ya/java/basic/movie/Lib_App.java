@@ -46,7 +46,7 @@ public class Lib_App {
 	private static void config(Library<Movie> temp) {
 
 
-		Movie[] bondMovies = new Movie[12];
+		Movie[] bondMovies = new Movie[17];
 
 		bondMovies[0] = new Movie("Dr No", "Sean Connory", 1962, 109);
 		bondMovies[1] = new Movie("From Russia with Love", "Sean Connory", 1963, 115);
@@ -60,7 +60,14 @@ public class Lib_App {
 		bondMovies[9] = new Movie("Casino Royale", "Daniel Craig", 2006, 144);		
 		bondMovies[10] = new Movie("Skyfall", "Daniel Craig", 2012, 143);
 		bondMovies[11] = new Movie("Spectre", "Daniel Craig", 2015, 148);	
-
+		
+		bondMovies[12] = new Movie("King Kong", "Naomi Watts", 2005, 187);	
+		bondMovies[13] = new Movie("King Kong", "Fay Wray", 1933, 100);
+		bondMovies[14] = new Movie("King Kong", "Jeff Bridges", 1976, 134);
+		
+		bondMovies[15] = new Movie("Movie Name", "The Main Actor", 2000, 134);
+		bondMovies[16] = new Movie("Movie Name", "The Main Actor", 2000, 136);
+		
 		Arrays.sort(bondMovies);
 
 		for(int i=0; i<bondMovies.length; i++){

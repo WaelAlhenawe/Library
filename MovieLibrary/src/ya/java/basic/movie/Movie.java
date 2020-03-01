@@ -10,7 +10,7 @@ public class Movie implements Comparable<Movie>{
 	private final int length;
 	private final int id;
 
-	
+
 	/**
 	 * @param id
 	 * @param name
@@ -25,15 +25,15 @@ public class Movie implements Comparable<Movie>{
 		this.productionYear = productionYear;
 		this.length = length;
 	}
-	
-	
+
+
 	/**
 	 * @return the name
 	 */
 	public String getTitle() {
 		return title;
 	}
-	
+
 	/**
 	 * @return the mainActor
 	 */
@@ -46,21 +46,21 @@ public class Movie implements Comparable<Movie>{
 	public int getProductionYear() {
 		return productionYear;
 	}
-	
+
 	/**
 	 * @return the length
 	 */
 	public int getLength() {
 		return length;
 	}
-	
+
 	/**
 	 * @return the elementNo
 	 */
 	public int getId() {
 		return id;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -97,18 +97,31 @@ public class Movie implements Comparable<Movie>{
 
 	@Override
 	public int compareTo(Movie that) {
-		return this.length - that.length;
+		if ((this.title.compareTo(that.title)) != 0) {
+			return this.title.compareTo(that.title);
+		}
+		else {	
+			if ((this.productionYear - that.productionYear) != 0) {
+				return this.productionYear - that.productionYear;
+			}
+			else {	
+				if ((this.length - that.length) != 0) {
+					return this.length - that.length;
+				}
+			}
+		}
+		return 0;
 	}
-	
-
-	
-
-	
-	
-	
-	
 
 
-	
+
+
+
+
+
+
+
+
+
 
 }
