@@ -1,6 +1,8 @@
 package ya.java.basic.movie;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class Lib_App {
@@ -9,9 +11,9 @@ public class Lib_App {
 
 	public static void main(String[] args) {
 
-	//	int recivedID = 0;
+		//	int recivedID = 0;
 		Boolean ok = true;//, flag = true;
-	//	String temp;
+		//	String temp;
 		input.useDelimiter(System.getProperty("line.separator"));
 
 		Library<Movie> lib = new M_Library();
@@ -20,7 +22,7 @@ public class Lib_App {
 
 		do {
 			int choice = mainMenu();
-			
+
 			switch (choice) {
 			case 1 : case 3 :
 				lib.showLibraryContents();
@@ -32,6 +34,14 @@ public class Lib_App {
 				lib.addItem(creatMovieMenu());
 				break;
 			case 4:
+				List <Movie> result;
+				result = lib.searchItem();
+				if (result.equals(Collections.emptyList())) continue;
+				else {
+					for ( Movie m : result) {
+						System.out.println(m);
+					}
+				}
 				break;
 			case 0:
 				ok = false;
@@ -60,14 +70,14 @@ public class Lib_App {
 		bondMovies[9] = new Movie("Casino Royale", "Daniel Craig", 2006, 144);		
 		bondMovies[10] = new Movie("Skyfall", "Daniel Craig", 2012, 143);
 		bondMovies[11] = new Movie("Spectre", "Daniel Craig", 2015, 148);	
-		
+
 		bondMovies[12] = new Movie("King Kong", "Naomi Watts", 2005, 187);	
 		bondMovies[13] = new Movie("King Kong", "Fay Wray", 1933, 100);
 		bondMovies[14] = new Movie("King Kong", "Jeff Bridges", 1976, 134);
-		
+
 		bondMovies[15] = new Movie("Movie Name", "The Main Actor", 2000, 134);
 		bondMovies[16] = new Movie("Movie Name", "The Main Actor", 2000, 136);
-		
+
 		Arrays.sort(bondMovies);
 
 		for(int i=0; i<bondMovies.length; i++){
@@ -162,13 +172,8 @@ public class Lib_App {
 			temp = input.next();
 			System.out.println("****************************");
 
-			try {
-				flag = true;
-				recivedID = Integer.parseInt(temp);
-			} catch (NumberFormatException e) {
-				System.out.format("\nONLY DIGITS ALLOWED\n\n");
-				flag = false;
-			}
+			flag = inputDigitsFilter(temp, "ONLY DIGITS ALLOWED");
+			recivedID = Integer.parseInt(temp);
 
 		} while (!flag);
 
@@ -182,5 +187,17 @@ public class Lib_App {
 			System.out.format("The Id you Entered (%d) Has not Found\nNo Change has been Happens to your Library\n", recivedID);
 		}
 
+	}
+
+	protected static Boolean inputDigitsFilter (String Input, String errorMessage) {
+		Boolean flag = true;
+		try {
+			@SuppressWarnings("unused")
+			int recivedID = Integer.parseInt(Input);
+		} catch (NumberFormatException e) {
+			System.out.format("\n%s\n\n",errorMessage );
+			flag = false;
+		}
+		return flag;
 	}
 }

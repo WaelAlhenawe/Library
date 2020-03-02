@@ -25,24 +25,24 @@ public interface Library<T> {
 	 * @return a boolean true if item is removed, otherwise false
 	 */
 	boolean removeItem(T item);
-	
+
 	/**
 	 * This routine is responsible for keeping track of the number of items currently in storage
 	 * @return an int holding the current no of items in library
 	 */
 	int getNoOfItems();
-	
+
 	/**
 	 * This routine should present the entire contents of the library to console
 	 */
 	void showLibraryContents();
-	
+
 	/**
 	 * This routine should store the entire contents of the library in a textfile, item by item
 	 * @param filename a String defining the full name of the file to write to
 	 */
 	void storeItemsToTextfile(String filename);
-	
+
 	/**
 	 * This routine should read data from a textfile and pass it on to the library
 	 * @param filename a String defining the full name of the file to read from
@@ -53,12 +53,12 @@ public interface Library<T> {
 	 * NB! The default implementation return an empty list to avoid using null  
 	 */
 	default List<T> searchItem(){return Collections.emptyList();}
-	
+
 	/**
 	 * This routine provides a way to get hold of a single item from storage 
 	 * NB! The default implementation return a null reference 
 	 * @param a Movie reference if available
 	 */
 	default Movie getItem(int movieId) {return null;}
-	
-	}
+
+}

@@ -90,7 +90,7 @@ public class Movie implements Comparable<Movie>{
 
 	@Override
 	public String toString() {
-		return String.format("Movie [ Id: %d Title: %s, Main Actor: %s, Production Year: %d, Length: %d]",id , title,
+		return String.format("Movie [ Id: %d, Title: %s, Main Actor: %s, Production Year: %d, Length: %d]",id , title,
 				mainActor, productionYear, length);
 	}
 
@@ -112,16 +112,4 @@ public class Movie implements Comparable<Movie>{
 		}
 		return 0;
 	}
-
-
-
-
-
-
-
-
-
-
-
-
 }

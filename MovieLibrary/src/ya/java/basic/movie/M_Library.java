@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
 public class M_Library implements Library<Movie>{
-	
+
 	private List <Movie> movieList;
 
 	/**
@@ -28,7 +29,7 @@ public class M_Library implements Library<Movie>{
 	@Override
 	public int getNoOfItems() {
 		return this.movieList.size();
-		
+
 	}
 
 	@Override
@@ -36,25 +37,131 @@ public class M_Library implements Library<Movie>{
 		for(Movie m: movieList) {
 			System.out.println(m);
 		}
-		
+
 	}
 
 	@Override
 	public void storeItemsToTextfile(String filename) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void readItemsFromTextfile(String filename) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public List<Movie> searchItem() {
 		var result = new ArrayList<Movie>();
-		
+		int choice = searchMenu();
+		Boolean errorInputflag = true;
+		Boolean resultflag = false;
+
+		int temp =0;
+		switch (choice) {
+		case 1:
+
+			do {
+				System.out.print("Please Enter the ID: ");
+				String searchedId = Lib_App.input.next();
+				System.out.println("***********************");
+				errorInputflag = Lib_App.inputDigitsFilter(searchedId, "ONLY DIGITS ALLOWED");
+				temp = Integer.parseInt(searchedId);
+
+			} while (!errorInputflag);
+
+			for(Movie m: movieList) {
+				if (m.getId()==temp) {
+					result.add(m);
+					resultflag= true;
+				}
+
+			}
+			if (!resultflag) {
+				System.out.format("Sorry the ID you Had Entered (%d) did Not Found\n", temp);
+			}
+			break;
+
+		case 2 :
+			System.out.print("Please Enter the Movie Title: ");
+			String searchedTitle = Lib_App.input.next();
+			System.out.println("***********************");
+
+			for(Movie m: movieList) {				
+				if (m.getTitle().equalsIgnoreCase(searchedTitle)) {
+					result.add(m);
+					resultflag= true;
+				}
+			}
+			if (!resultflag) {
+				System.out.format("Sorry the Title you Had Entered (%s) did Not Found\n", searchedTitle);
+			}
+			break;
+
+		case 3 :
+			System.out.print("Please Enter Actor Name: ");
+			String searchedActor = Lib_App.input.next();
+			System.out.println("***********************");
+
+			for(Movie m: movieList) {
+				if (m.getMainActor().equalsIgnoreCase(searchedActor)){
+					result.add(m);
+					resultflag= true;
+
+				}
+			}
+			if (!resultflag) {
+				System.out.format("Sorry the Actor you Had Entered (%s) did Not Found\n", searchedActor);
+			}
+			break;
+		case 4:
+			do {
+				System.out.print("Please Enter the Production Year: ");
+				String searchedYear = Lib_App.input.next();
+				System.out.println("***********************");
+				errorInputflag = Lib_App.inputDigitsFilter(searchedYear, "ONLY DIGITS ALLOWED");
+				temp = Integer.parseInt(searchedYear);
+
+			} while (!errorInputflag);
+
+			for(Movie m: movieList) {
+				if (m.getProductionYear()==temp) {
+					result.add(m);
+					resultflag= true;
+				}
+
+			}
+			if (!resultflag) {
+				System.out.format("Sorry the Production Year you Had Entered (%d) did Not Found\n", temp);
+			}
+			break;
+		case 5:
+			do {
+				System.out.print("Please Enter the Movie Lenght: ");
+				String searchedLenght = Lib_App.input.next();
+				System.out.println("***********************");
+				errorInputflag = Lib_App.inputDigitsFilter(searchedLenght, "ONLY DIGITS ALLOWED");
+				temp = Integer.parseInt(searchedLenght);
+
+			} while (!errorInputflag);
+
+			for(Movie m: movieList) {
+				if (m.getLength()==temp) {
+					result.add(m);
+					resultflag= true;
+				}
+
+			}
+			if (!resultflag) {
+				System.out.format("Sorry the Movie Length you Had Entered (%d) did Not Found\n", temp);
+			}
+			break;
+		case 0:
+			break;
+
+		}
 		return result;
 	}
 
@@ -67,7 +174,7 @@ public class M_Library implements Library<Movie>{
 		}
 		return null;
 	}
-	
+
 	private static int searchMenu() {
 		boolean ok = true;
 		int choice=-1;
@@ -96,14 +203,15 @@ public class M_Library implements Library<Movie>{
 			System.out.println("***********************");
 
 			try {
+				ok = false;
 				choice = Integer.parseInt(temp);
 			} catch (NumberFormatException e) {
-				ok = false;
+				ok = true;
 			}
 
-			if (!(choice > 0 && choice < 5 )) ok = false;
+			if (!(choice >= 0 && choice <= 5)) ok = true;
 		}
-		while (!(choice > 0 && choice < 5 ));
+		while (ok);
 
 		return choice;
 	}
