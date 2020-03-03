@@ -65,10 +65,14 @@ public class Movie implements Comparable<Movie>{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + length;
+		result = prime * result + ((mainActor == null) ? 0 : mainActor.hashCode());
+		result = prime * result + productionYear;
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
+
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -78,15 +82,17 @@ public class Movie implements Comparable<Movie>{
 		if (getClass() != obj.getClass())
 			return false;
 		Movie other = (Movie) obj;
-		if (id != other.id)
-			return false;
-		if (title == null) {
-			if (other.title != null)
+		if ((mainActor.equals(other.mainActor))&&
+				(title.equals(other.title))&&
+				(productionYear == other.productionYear)&&
+				(length == other.length)) {
+			return true;
+		}
+		else {
 				return false;
-		} else if (!title.equals(other.title))
-			return false;
-		return true;
+		} 
 	}
+
 
 	@Override
 	public String toString() {
