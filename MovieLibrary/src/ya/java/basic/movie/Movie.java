@@ -3,6 +3,9 @@ package ya.java.basic.movie;
 
 public class Movie implements Comparable<Movie>{
 
+	public static final int Min_Year = 1900;
+	public static final int Max_Year = 2020;
+	public static final int Min_Length = 60;
 	private static int uniqueNo=0;
 	private final String title;
 	private final String mainActor;
@@ -19,13 +22,33 @@ public class Movie implements Comparable<Movie>{
 	 * @param length
 	 */
 	public Movie(String title, String mainActor, int productionYear, int length) {
+		
+		if (title == null || title.isEmpty()) {
+			throw new IllegalArgumentException("Title missing");
+		}
+		else {
+			if (mainActor == null || mainActor.isEmpty()) {
+				throw new IllegalArgumentException("Actor missing");
+			}
+			else {
+				if (productionYear < Min_Year || productionYear > Max_Year) {
+					throw new IllegalArgumentException(String.format("Production Year (%d) not Accepted", productionYear));
+				}
+				else {
+					if (length < Min_Length) {
+						throw new IllegalArgumentException(String.format("Length (%d) is not Accepted", length));
+					}
+				}
+			}
+			
+		}
+		
 		id = ++uniqueNo;
 		this.title = title;
 		this.mainActor = mainActor;
 		this.productionYear = productionYear;
 		this.length = length;
 	}
-
 
 	/**
 	 * @return the name

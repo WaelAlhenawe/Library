@@ -16,7 +16,7 @@ import org.junit.runners.MethodSorters;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TestJUnitJavaMovie {
+public class AATestJUnitJavaMovie {
 //Movie [ Id: 10, Title: Casino Royale, Main Actor: Daniel Craig, Production Year: 2006, Length: 144]
 	@Test
 	public void AAtestJavaMovie1() {
@@ -157,5 +157,47 @@ public class TestJUnitJavaMovie {
 		Movie temp = new Movie("Casino Royale","Daniel Craig",2006,100);
 		Movie temp2 = new Movie("Casino Royale","Daniel Craig",2006,101);
 		Assert.assertEquals(-1, temp.compareTo(temp2));
+	}
+	
+	@Test (expected = IllegalArgumentException.class)
+	public void AXtestJavaCircle22() {
+		new Movie("Casino Royale","",2006,100);
+	}
+	
+	@Test (expected = IllegalArgumentException.class)
+	public void AYtestJavaCircle23() {
+		new Movie("Casino Royale",null,2006,100);
+	}
+	
+	@Test (expected = IllegalArgumentException.class)
+	public void AZtestJavaCircle24() {
+		new Movie("","Daniel Craig",2006,100);
+	}
+	
+	@Test (expected = IllegalArgumentException.class)
+	public void BAtestJavaCircle25() {
+		new Movie(null,"Daniel Craig",2006,100);
+	}
+	
+	@Test (expected = IllegalArgumentException.class)
+	public void BBtestJavaCircle26() {
+		new Movie("Casino Royale", "Daniel Craig",1899,100);
+	}
+	
+	@Test (expected = IllegalArgumentException.class)
+	public void BCtestJavaCircle27() {
+		new Movie("Casino Royale", "Daniel Craig",2021,100);
+	}
+	
+	@Test (expected = IllegalArgumentException.class)
+	public void BDtestJavaCircle28() {
+		new Movie("Casino Royale", "Daniel Craig",2006,59);
+	}
+	
+	@Test 
+	public void BEtestJavaCircle29() {
+		Movie temp = new Movie("Casino Royale","Daniel Craig",2006,100);
+		Movie temp2 = new Movie("Casino Royale","Daniel Craig",2006,100);
+		Assert.assertEquals(temp.hashCode(), temp2.hashCode());
 	}
 }
