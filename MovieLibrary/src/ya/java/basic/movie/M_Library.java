@@ -4,11 +4,12 @@ package ya.java.basic.movie;
 import java.util.ArrayList;
 import java.util.List;
 
+import ya.java.basic.movie.SearchHelper.SearchType;
+
 
 
 public class M_Library implements Library<Movie>{
 
-	enum SearchType {ID, TITLE, ACTOR, YEAR, LENGHT, GO_BACK}
 
 
 	private List <Movie> movieList;
@@ -84,7 +85,7 @@ public class M_Library implements Library<Movie>{
 	/**
 	 * @param searchedLength
 	 */
-	public List<Movie> searchLength(String searchedLength) {
+	List<Movie> searchLength(String searchedLength) {
 		var result = new ArrayList<Movie>();
 		Boolean resultflag = false;
 		if (!(searchedLength.isBlank())) {
@@ -121,7 +122,7 @@ public class M_Library implements Library<Movie>{
 	/**
 	 * @param searchedYear
 	 */
-	public List<Movie>   searchYear(String searchedYear) {
+	List<Movie>   searchYear(String searchedYear) {
 		var result = new ArrayList<Movie>();
 		Boolean resultflag = false;
 		if (!(searchedYear.isBlank())) {
@@ -156,7 +157,7 @@ public class M_Library implements Library<Movie>{
 	/**
 	 * @param searchedActor
 	 */
-	public List<Movie> searchActor(String searchedActor) {
+	List<Movie> searchActor(String searchedActor) {
 		var result = new ArrayList<Movie>();
 		Boolean resultflag = false;
 		if (!(searchedActor.isBlank())) {			
@@ -180,7 +181,7 @@ public class M_Library implements Library<Movie>{
 	/**
 	 * @param searchedTitle
 	 */
-	public List<Movie> searchTitle(String searchedTitle) {
+	List<Movie> searchTitle(String searchedTitle) {
 		var result = new ArrayList<Movie>();
 		Boolean resultflag = false;
 		if (!(searchedTitle.isBlank())) {	
@@ -204,7 +205,7 @@ public class M_Library implements Library<Movie>{
 	/**
 	 * @param searchedID
 	 */
-	public List<Movie> searchID(String searchedID ){
+	List<Movie> searchID(String searchedID ){
 		var result = new ArrayList<Movie>();
 		Boolean resultflag = false;
 

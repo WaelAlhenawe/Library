@@ -3,13 +3,15 @@
  */
 package ya.java.basic.movie;
 
-import ya.java.basic.movie.M_Library.SearchType;
 
 /**
  * @author wael
  *
  */
 public class SearchHelper {
+	
+	enum SearchType {ID, TITLE, ACTOR, YEAR, LENGHT, GO_BACK}
+
 
 	protected static SearchType searchCLI() {
 		boolean ok = false;

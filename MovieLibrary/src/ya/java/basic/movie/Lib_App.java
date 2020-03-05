@@ -11,9 +11,7 @@ public class Lib_App {
 
 	public static void main(String[] args) {
 
-		//	int recivedID = 0;
-		Boolean ok = true;//, flag = true;
-		//	String temp;
+		Boolean ok = true;
 		input.useDelimiter(System.getProperty("line.separator"));
 
 		Library<Movie> lib = new M_Library();
@@ -88,7 +86,6 @@ public class Lib_App {
 		private static int mainMenu() {
 		boolean ok = false;
 		int choice=-1;
-		String temp;
 		do {
 			if (ok) {
 				System.out.println();
@@ -106,15 +103,13 @@ public class Lib_App {
 			System.out.println("*******************************");
 			System.out.print("Please Enter the Number of your Choice: ");
 
-			temp = input.next();
-			System.out.println("*******************************");
-
 			try {
 				ok = false;
-				choice = Integer.parseInt(temp);
+				choice = input.nextInt();
 			} catch (NumberFormatException e) {
 				ok = true;
 			}
+			System.out.println("*******************************");
 
 			if (!(choice >= 0 && choice <= 4)) ok = true;
 		}
@@ -125,39 +120,39 @@ public class Lib_App {
 
 
 	private static Movie creatMovieMenu() {
-		int iPYear , iLength ;
-		String name, mActor, sPYaer, slength;
+		int year , length;
 		Movie temp = null;
+		Boolean falg = false;
 
-		do{
-			iPYear = 0;
-			iLength = 0;
-			while ((iPYear == 0 && iLength == 0)) {
-				System.out.print("Enter The Movie Title: ");
-				name = input.next();
-				System.out.print("Enter The Movie Main Actor: ");
-				mActor = input.next();
-				System.out.print("Enter The Movie Production Year: ");
-				sPYaer = input.next();
-				try {
-					iPYear = Integer.parseInt(sPYaer);
-				} catch (NumberFormatException e) {
-					System.out.format("\nThe Year You Have Entered Is Wrong \nPLEASE TRY AGAIN\n\n");
-					break;
-				}
-				System.out.print("Enter The Movie Length: ");
-				slength = input.next();
-				try {
-					iLength = Integer.parseInt(slength);
-				} catch (NumberFormatException e) {
-					System.out.format("\nThe Length You Have Entered Is Wrong \nPLEASE TRY AGAIN\n\n ");
-					break;
-				}
-
-				temp =  new Movie(name, mActor, iPYear, iLength);
+		try {
+			do{
+					System.out.print("Enter The Movie Title: ");
+					String name = input.next();
+					System.out.print("Enter The Movie Main Actor: ");
+					String actor = input.next();
+					System.out.print("Enter The Movie Production Year: ");
+					try {
+						 year = input.nextInt();
+					} catch (NumberFormatException e) {
+						System.out.format("\nOnly Digits Allowed \nPLEASE TRY AGAIN\n\n");
+						falg = true;
+						break;
+					}
+					System.out.print("Enter The Movie Length: ");
+					try {
+						 length = input.nextInt();
+					} catch (NumberFormatException e) {
+						System.out.format("\nOnly Digits Allowed \nPLEASE TRY AGAIN\n\n ");
+						falg = true;
+						break;
+					}
+					temp =  new Movie(name, actor, year, length);
 			}
+			while(falg);
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			System.out.println("*******************************");
 		}
-		while((iPYear == 0 && iLength == 0));
 		return  temp;
 
 	}

@@ -1,9 +1,5 @@
 package ya.java.basic.movie;
 
-
-
-
-
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -312,13 +308,4 @@ public class ABTestJUnitJavaM_Library {
 		Assert.assertEquals(tempList1.searchLength("59"),(result));
 	}
 	
-//	@Test
-//	public void AXtestJavaM_Library24() {
-//		M_Library tempList1 = new M_Library();
-//		var result = new ArrayList<Movie>();
-//		Movie temp = new Movie("Casino Royale","Daniel Craig",2006,100);
-//		tempList1.addItem(temp);
-//
-//		Assert.assertEquals(tempList1.searchYear("yyyy"),(result));
-//	}
 }
