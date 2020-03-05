@@ -6,6 +6,7 @@ public class Movie implements Comparable<Movie>{
 	public static final int Min_Year = 1900;
 	public static final int Max_Year = 2020;
 	public static final int Min_Length = 60;
+	
 	private static int uniqueNo=0;
 	private final String title;
 	private final String mainActor;
@@ -105,10 +106,10 @@ public class Movie implements Comparable<Movie>{
 		if (getClass() != obj.getClass())
 			return false;
 		Movie other = (Movie) obj;
-		if ((mainActor.equals(other.mainActor))&&
-				(title.equals(other.title))&&
-				(productionYear == other.productionYear)&&
-				(length == other.length)) {
+		if ((mainActor.equals(other.mainActor))
+				&&(title.equals(other.title))
+					&&(productionYear == other.productionYear)
+						&&(length == other.length)) {
 			return true;
 		}
 		else {

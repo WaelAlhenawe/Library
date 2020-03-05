@@ -11,8 +11,8 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses(
 	{ 
-		TestJUnitJavaMovie.class, 
-
+		AATestJUnitJavaMovie.class, 
+		ABTestJUnitJavaM_Library.class,
 	}
 )
 public class JUnitAllTests {;}

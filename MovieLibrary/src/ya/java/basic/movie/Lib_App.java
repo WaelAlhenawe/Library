@@ -85,7 +85,7 @@ public class Lib_App {
 		}
 	}
 
-	private static int mainMenu() {
+		private static int mainMenu() {
 		boolean ok = false;
 		int choice=-1;
 		String temp;
@@ -173,9 +173,9 @@ public class Lib_App {
 			System.out.println("****************************");
 
 			flag = inputDigitsFilter(temp, "ONLY DIGITS ALLOWED");
-			recivedID = Integer.parseInt(temp);
 
 		} while (!flag);
+		recivedID = Integer.parseInt(temp);
 
 		Movie tempMovie = lib.getItem(recivedID);
 		if (tempMovie!=null) {
