@@ -2,6 +2,7 @@ package ya.java.basic.movie;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -209,26 +210,33 @@ public class M_Library implements Library<Movie>{
 	 * @param searchedTitle
 	 */
 	List<Movie> searchTitle(String searchedTitle) {
-		var result = new ArrayList<Movie>();
+		List<Movie> result = new ArrayList<Movie>();
 		Boolean resultflag = false;
 		if (!(searchedTitle.isBlank())) {	
-			Set<String> keys = movieMapTree.keySet();
-			List <Movie> temps = new ArrayList<>();
-			for(String k: keys) {
-				temps = movieMapTree.get(k);
-				for(Movie m: temps) {
-					if (m.getTitle().equals(Movie.fixMapKeyFormat(searchedTitle))) {
-						result.add(m);
-						resultflag = true;
-					}
-				}
+			result = movieMapTree.get(Movie.fixMapKeyFormat(searchedTitle));
+			if(result != null) {
+				resultflag = true;
 			}
 		}
+			//			Set<String> keys = movieMapTree.keySet();
+//			List <Movie> temps = new ArrayList<>();
+//			for(String k: keys) {
+//				temps = movieMapTree.get(k);
+//				for(Movie m: temps) {
+//					if (m.getTitle().equals(Movie.fixMapKeyFormat(searchedTitle))) {
+//						result.add(m);
+//						resultflag = true;
+//					}
+//				}
+//			}
+//		}
 		else {
 			System.out.println("You Entered NOTHING");
+			result = Collections.emptyList();
 			resultflag= true;
 		}
 		if (!resultflag) {
+			result = Collections.emptyList();
 			System.out.format("Sorry the Title you Had Entered (%s) did Not Found\n", searchedTitle);
 		}
 		return result;

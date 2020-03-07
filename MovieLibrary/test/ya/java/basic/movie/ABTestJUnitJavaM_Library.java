@@ -3,6 +3,7 @@ package ya.java.basic.movie;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -148,11 +149,10 @@ public class ABTestJUnitJavaM_Library {
 	@Test
 	public void ANtestJavaM_Library14() {
 		M_Library tempList1 = new M_Library();
-		var result = new ArrayList<Movie>();
 		Movie temp = new Movie("Casino Royale","Daniel Craig",2006,100);
 		tempList1.addItem(temp);
 		
-		Assert.assertEquals(tempList1.searchTitle("ssss"),(result));
+		Assert.assertEquals(tempList1.searchTitle("ssss"),Collections.emptyList());
 	}
 	
 	@Test
