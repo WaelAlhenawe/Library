@@ -45,7 +45,7 @@ public class Movie implements Comparable<Movie>{
 		}
 		
 		id = ++uniqueNo;
-		this.title = title;
+		this.title = fixMapKeyFormat(title);
 		this.mainActor = mainActor;
 		this.productionYear = productionYear;
 		this.length = length;
@@ -142,4 +142,33 @@ public class Movie implements Comparable<Movie>{
 		}
 		return 0;
 	}
-}
+
+	protected static String fixMapKeyFormat (String befor) {
+		String [] temp = befor.split(" ");
+		String after = new String();
+		for(String s : temp) {
+			if (!(s.isBlank())) {
+				char [] part = s.toCharArray();
+				for (int c = 0 ; c < part.length ; c++){
+					if(c == 0 &&  Character.isLetter(part[c])){
+						after += (Character.toUpperCase(part[c]));
+					}
+					else {
+						if(Character.isDigit(part[c]) || part[c] == '-') {
+							after += (part[c]);
+						}
+						else {
+							if(Character.isLetter(part[c])) {
+								after += (Character.toLowerCase(part[c]));
+							}
+						}
+					}
+				}
+				after += (' ');
+			}
+		}
+		after = after.substring(0, after.length()-1);
+		return after; 
+	}
+} 
+

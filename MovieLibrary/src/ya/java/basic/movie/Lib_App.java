@@ -83,7 +83,7 @@ public class Lib_App {
 		}
 	}
 
-		private static int mainMenu() {
+	private static int mainMenu() {
 		boolean ok = false;
 		int choice=-1;
 		do {
@@ -126,27 +126,27 @@ public class Lib_App {
 
 		try {
 			do{
-					System.out.print("Enter The Movie Title: ");
-					String name = input.next();
-					System.out.print("Enter The Movie Main Actor: ");
-					String actor = input.next();
-					System.out.print("Enter The Movie Production Year: ");
-					try {
-						 year = input.nextInt();
-					} catch (NumberFormatException e) {
-						System.out.format("\nOnly Digits Allowed \nPLEASE TRY AGAIN\n\n");
-						falg = true;
-						break;
-					}
-					System.out.print("Enter The Movie Length: ");
-					try {
-						 length = input.nextInt();
-					} catch (NumberFormatException e) {
-						System.out.format("\nOnly Digits Allowed \nPLEASE TRY AGAIN\n\n ");
-						falg = true;
-						break;
-					}
-					temp =  new Movie(name, actor, year, length);
+				System.out.print("Enter The Movie Title: ");
+				String name = input.next();
+				System.out.print("Enter The Movie Main Actor: ");
+				String actor = input.next();
+				System.out.print("Enter The Movie Production Year: ");
+				try {
+					year = input.nextInt();
+				} catch (NumberFormatException e) {
+					System.out.format("\nOnly Digits Allowed \nPLEASE TRY AGAIN\n\n");
+					falg = true;
+					break;
+				}
+				System.out.print("Enter The Movie Length: ");
+				try {
+					length = input.nextInt();
+				} catch (NumberFormatException e) {
+					System.out.format("\nOnly Digits Allowed \nPLEASE TRY AGAIN\n\n ");
+					falg = true;
+					break;
+				}
+				temp =  new Movie(name, actor, year, length);
 			}
 			while(falg);
 		} catch (IllegalArgumentException e) {
@@ -196,3 +196,4 @@ public class Lib_App {
 		return flag;
 	}
 }
+//  g1G-%dd   Gh12nK

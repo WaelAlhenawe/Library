@@ -3,6 +3,9 @@ package ya.java.basic.movie;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 import ya.java.basic.movie.SearchHelper.SearchType;
 
@@ -12,37 +15,46 @@ public class M_Library implements Library<Movie>{
 
 
 
-	private List <Movie> movieList;
+	private Map<String, List<Movie>> movieMapTree;
 
 	/**
 	 * @param movieList
 	 */
 	public M_Library() {
-		this.movieList = new ArrayList<>();
+		this.movieMapTree = new TreeMap<>();
 	}
 
 	@Override
 	public boolean addItem(Movie item) {
-		return movieList.add(item);
+		boolean flag = false;
+		if (movieMapTree.containsKey(item.getTitle())) {
+			flag = true;
+			List<Movie> temp = movieMapTree.get(item.getTitle());
+			temp.add(item);
+		}else {
+			flag = true;
+			List<Movie> temp = new ArrayList<>();
+			temp.add(item);
+			movieMapTree.putIfAbsent(item.getTitle(), temp);	
+		}
+		return flag;
 	}
-
 	@Override
 	public boolean removeItem(Movie item) {
-		return movieList.remove(item);
+		return movieMapTree.get(item.getTitle()).remove(item);
 	}
 
 	@Override
 	public int getNoOfItems() {
-		return this.movieList.size();
+		return this.movieMapTree.size();
 
 	}
 
 	@Override
 	public void showLibraryContents() {
-		for(Movie m: movieList) {
-			System.out.println(m);
-		}
+		movieMapTree.forEach((k,v)-> v.forEach((s)->System.out.println(s)));
 	}
+
 
 	@Override
 	public void storeItemsToTextfile(String filename) {
@@ -91,12 +103,17 @@ public class M_Library implements Library<Movie>{
 		if (!(searchedLength.isBlank())) {
 			try {
 				int temp = Integer.parseInt(searchedLength);
-
+		
 				if (temp >= Movie.Min_Length) {
-					for (Movie m : movieList) {
-						if (m.getLength() == temp) {
-							result.add(m);
-							resultflag = true;
+					Set<String> keys = movieMapTree.keySet();
+					List <Movie> temps = new ArrayList<>();
+					for(String k: keys) {
+						temps = movieMapTree.get(k);
+						for(Movie m: temps) {
+							if (m.getLength()==temp) {
+								result.add(m);
+								resultflag = true;
+							}
 						}
 					}
 				} else {
@@ -130,10 +147,15 @@ public class M_Library implements Library<Movie>{
 				int temp = Integer.parseInt(searchedYear);
 
 				if (temp >= Movie.Min_Year && temp <= Movie.Max_Year) {
-					for (Movie m : movieList) {
-						if (m.getProductionYear() == temp) {
-							result.add(m);
-							resultflag = true;
+					Set<String> keys = movieMapTree.keySet();
+					List <Movie> temps = new ArrayList<>();
+					for(String k: keys) {
+						temps = movieMapTree.get(k);
+						for(Movie m: temps) {
+							if (m.getProductionYear()==temp) {
+								result.add(m);
+								resultflag = true;
+							}
 						}
 					}
 				} else {
@@ -160,11 +182,16 @@ public class M_Library implements Library<Movie>{
 	List<Movie> searchActor(String searchedActor) {
 		var result = new ArrayList<Movie>();
 		Boolean resultflag = false;
-		if (!(searchedActor.isBlank())) {			
-			for(Movie m: movieList) {
-				if (m.getMainActor().equalsIgnoreCase(searchedActor)){
-					result.add(m);
-					resultflag= true;
+		if (!(searchedActor.isBlank())) {	
+			Set<String> keys = movieMapTree.keySet();
+			List <Movie> temps = new ArrayList<>();
+			for(String k: keys) {
+				temps = movieMapTree.get(k);
+				for(Movie m: temps) {
+					if (m.getMainActor().equalsIgnoreCase(searchedActor)) {
+						result.add(m);
+						resultflag = true;
+					}
 				}
 			}
 		}
@@ -185,10 +212,15 @@ public class M_Library implements Library<Movie>{
 		var result = new ArrayList<Movie>();
 		Boolean resultflag = false;
 		if (!(searchedTitle.isBlank())) {	
-			for(Movie m: movieList) {				
-				if (m.getTitle().equalsIgnoreCase(searchedTitle)) {
-					result.add(m);
-					resultflag= true;
+			Set<String> keys = movieMapTree.keySet();
+			List <Movie> temps = new ArrayList<>();
+			for(String k: keys) {
+				temps = movieMapTree.get(k);
+				for(Movie m: temps) {
+					if (m.getTitle().equals(Movie.fixMapKeyFormat(searchedTitle))) {
+						result.add(m);
+						resultflag = true;
+					}
 				}
 			}
 		}
@@ -235,15 +267,16 @@ public class M_Library implements Library<Movie>{
 
 	@Override
 	public Movie getItem(int movieId) {
-		for(Movie m: movieList) {
-			if (m.getId()==movieId) {
-				return m;
+		Set<String> keys = movieMapTree.keySet();
+		for(String k: keys) {
+			List <Movie> temps = new ArrayList<>();
+			temps = movieMapTree.get(k);
+			for(Movie m: temps) {
+				if (m.getId()==movieId) {
+					return m;
+				}
 			}
 		}
 		return null;
 	}
-
-
-
-
 }
