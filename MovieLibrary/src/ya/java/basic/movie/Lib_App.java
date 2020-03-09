@@ -15,7 +15,7 @@ public class Lib_App {
 		input.useDelimiter(System.getProperty("line.separator"));
 
 		Library<Movie> lib = new M_Library();
-		config(lib);
+//		config(lib);
 		System.out.println("Library Program has been configured with 12 movies");
 
 		do {
@@ -40,6 +40,13 @@ public class Lib_App {
 						System.out.println(m);
 					}
 				}
+				break;
+			case 5:
+				lib.storeItemsToTextfile("database.txt");
+				System.out.println("All Data has been Saved To Text File");
+				break;
+			case 6:
+				lib.readItemsFromTextfile("database.txt");
 				break;
 			case 0:
 				ok = false;
@@ -99,6 +106,8 @@ public class Lib_App {
 			System.out.println("2 - Add Movie to library");
 			System.out.println("3 - Remove Movie from library");
 			System.out.println("4 - Search for a Movie");
+			System.out.println("5 - Store current library contents in textfile");
+			System.out.println("6 - Read contents from textfile to library");
 			System.out.println("0 - Exit application");
 			System.out.println("*******************************");
 			System.out.print("Please Enter the Number of your Choice: ");
@@ -111,7 +120,7 @@ public class Lib_App {
 			}
 			System.out.println("*******************************");
 
-			if (!(choice >= 0 && choice <= 4)) ok = true;
+			if (!(choice >= 0 && choice <= 6)) ok = true;
 		}
 		while (ok);
 

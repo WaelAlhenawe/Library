@@ -308,4 +308,11 @@ public class ABTestJUnitJavaM_Library {
 		Assert.assertEquals(tempList1.searchLength("59"),(result));
 	}
 	
+	@Test
+	public void BDtestJavaM_Library30() {
+		M_Library tempList1 = new M_Library();
+		Movie result = tempList1.parcing("Movie [ Id: 48, Title: Casino Royale, Main Actor: Daniel Craig, Production Year: 2006, Length: 100]");
+		Movie temp = new Movie("Casino Royale","Daniel Craig",2006,100);
+		Assert.assertTrue(temp.equals(result));
+	}
 }

@@ -1,6 +1,12 @@
 package ya.java.basic.movie;
 
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -58,15 +64,27 @@ public class M_Library implements Library<Movie>{
 
 
 	@Override
-	public void storeItemsToTextfile(String filename) {
-		// TODO Auto-generated method stub
+	public void storeItemsToTextfile(String filename)  {
+		try (PrintWriter pW = new PrintWriter (new FileWriter(filename))){
+			movieMapTree.forEach((k,v)-> v.forEach((s)-> pW.println(s)));
+			}	
+		
+		catch (IOException ioe) {
+			System.out.println("Exception occurred: "+ ioe);
+		}
 
 	}
 
 	@Override
-	public void readItemsFromTextfile(String filename) {
-		// TODO Auto-generated method stub
-
+	public void readItemsFromTextfile(String filename)  {
+		try(BufferedReader re = new BufferedReader(new FileReader(filename))){
+			while(re.ready()) {
+				this.addItem(parcing(re.readLine()));
+			}
+			
+		} catch (IOException ioe) {
+			System.out.println("Exception occurred: "+ ioe);
+		} 
 	}
 
 	@Override
@@ -104,7 +122,7 @@ public class M_Library implements Library<Movie>{
 		if (!(searchedLength.isBlank())) {
 			try {
 				int temp = Integer.parseInt(searchedLength);
-		
+
 				if (temp >= Movie.Min_Length) {
 					Set<String> keys = movieMapTree.keySet();
 					List <Movie> temps = new ArrayList<>();
@@ -218,18 +236,7 @@ public class M_Library implements Library<Movie>{
 				resultflag = true;
 			}
 		}
-			//			Set<String> keys = movieMapTree.keySet();
-//			List <Movie> temps = new ArrayList<>();
-//			for(String k: keys) {
-//				temps = movieMapTree.get(k);
-//				for(Movie m: temps) {
-//					if (m.getTitle().equals(Movie.fixMapKeyFormat(searchedTitle))) {
-//						result.add(m);
-//						resultflag = true;
-//					}
-//				}
-//			}
-//		}
+
 		else {
 			System.out.println("You Entered NOTHING");
 			result = Collections.emptyList();
@@ -287,4 +294,21 @@ public class M_Library implements Library<Movie>{
 		}
 		return null;
 	}
+
+	Movie parcing (String oneLine) {
+		Movie temp =null;
+		String [] parts = oneLine.split(":");
+		for (int x = 2; x < parts.length; x++ ) {
+			if (parts[x].contains(",")) {
+				String []supParts = parts[x].split(",");
+				parts[x] = supParts[0].substring(1, supParts[0].length());
+			}else {
+				parts[x] = parts[x].substring(0, parts[x].length()-1).strip();
+			}
+		}
+		temp = new Movie(parts[2], parts[3],Integer.parseInt(parts[4]), Integer.parseInt(parts[5]));
+		return temp;
+	}
 }
+
+
